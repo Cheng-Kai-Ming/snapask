@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_12_035520) do
+ActiveRecord::Schema.define(version: 2022_02_12_073835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.string "currency"
+    t.string "category"
+    t.string "state"
+    t.string "url"
+    t.text "intro"
+    t.time "valid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "serial"
+    t.integer "user_id"
+    t.integer "course_id"
+    t.integer "amount"
+    t.datetime "paid_at"
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
