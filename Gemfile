@@ -26,6 +26,8 @@ gem 'aasm', '~> 4.11'
 gem 'pg', '~> 1.1'
 gem "grape"
 gem 'grape-entity'
+gem 'rolify'
+gem 'cancancan'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
