@@ -5,16 +5,14 @@ module ApiV0
         error! "forbidden", 403
       end
     end
-    
+  
+    use ApiV0::Auth::Middleware
+    include ApiV0::ExceptionHandlers
+    helpers ::ApiV0::Helpers
     version 'v0', using: :path    
     mount Courses
     mount Ping
     mount Orders   
-
-    use ApiV0::Auth::Middleware
-    include ApiV0::ExceptionHandlers
-    helpers ::ApiV0::Helpers
-    
   
   end
 end

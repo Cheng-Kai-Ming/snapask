@@ -2,6 +2,7 @@ module ApiV0
   module Auth
     class Authenticator
       def initialize(request, params)
+
         @request = request
         @params  = params
       end
@@ -12,6 +13,7 @@ module ApiV0
       end
 
       def token
+
         @token = ApiAccessToken.joins(:user).where(key: @params[:access_key]).first
       end
 
