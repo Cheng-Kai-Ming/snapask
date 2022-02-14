@@ -17,6 +17,7 @@ module ApiV0
       end
 
       def auth_provided?
+        byebug
         params[:access_key].present?
       end
     end
