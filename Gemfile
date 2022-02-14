@@ -29,7 +29,7 @@ gem 'grape-entity'
 gem 'rolify'
 gem 'cancancan'
 gem 'rest-client'
-gem 'stimulus-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

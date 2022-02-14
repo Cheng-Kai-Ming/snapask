@@ -2,9 +2,7 @@ class CoursesController < ApplicationController
   require 'rest-client'
 
   def user
-    url = "http://localhost:3000/api/v0/courses"
-    x = RestClient.get(url)
-    byebug
+
   end
 
   def index
