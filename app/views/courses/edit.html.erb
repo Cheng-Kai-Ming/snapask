@@ -25,8 +25,9 @@
   </div>
 
   <div class="fields">
-    <%= f.label "有效天數" %>
-    <%= f.select :valid_time, (1..30).to_a %>
+    <%= f.label "有效日" %>
+    <%= f.select :valid_time, (1..30).to_a,
+      selected: @course.valid_time %>
   </div>
   
 

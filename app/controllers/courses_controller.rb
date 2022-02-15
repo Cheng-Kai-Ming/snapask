@@ -1,12 +1,6 @@
 class CoursesController < ApplicationController
   require 'rest-client'
 
-  def user
-    url = "http://localhost:3000/api/v0/courses"
-    x = RestClient.get(url)
-    byebug
-  end
-
   def index
     @courses = Course.all
   end
@@ -25,8 +19,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = current_user.courses.build(course_params)
-
+    @course = Course.new(course_params)
     if @course.save
       redirect_to courses_path, notice: "新增課程成功"
     else
@@ -35,9 +28,11 @@ class CoursesController < ApplicationController
   end
 
   def edit
+    @course = Course.find_by(id:params["id"])
   end
 
   def update
+    @course = Course.find_by(id:params["id"])
     if @course.update(course_params)
       redirect_to courses_path, notice: "課程更新成功"
     else
@@ -46,6 +41,7 @@ class CoursesController < ApplicationController
   end
 
   def destroy
+    @course = Course.find_by(id:params["id"])
     @course.destroy
     redirect_to courses_path, notice: "課程已刪除"
   end
@@ -56,6 +52,8 @@ class CoursesController < ApplicationController
   end
 
   def course_params
-    params.require(:course).permit(:name, :price, :intro, :hour)
+
+    params.require(:course).permit(:name, :price, :intro, :currency, :valid_time, :category)
+
   end
 end
