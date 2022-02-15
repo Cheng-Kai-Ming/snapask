@@ -26,5 +26,17 @@ export default class extends Controller {
       .then(function(response) {return response.json()} )
       .then(function(json){console.log(json)}) 
   
-}
+  }
+
+  buildOrder(){
+    fetch('/api/v0/build/order?access_key=qBvsmmlntfHhbKre570h7es9BJjUM6qDT6gVzj0E&course_id=1&amount=300',{
+      headers:{
+        "X-Api-Secret-Key":"secret",
+      },
+      method: 'POST'
+    })
+      .then(function(response) {return response.json()} )
+      .then(function(json){console.log(json)}) 
+
+  }
 }
