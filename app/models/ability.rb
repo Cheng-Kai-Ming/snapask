@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-TODO
 class Ability
   include CanCan::Ability
 
@@ -14,7 +13,7 @@ class Ability
       end
     end
   
-    protected
+
   
     # def basic_read_only
     #   can :read, Forum

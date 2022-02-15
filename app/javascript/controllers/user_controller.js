@@ -29,7 +29,7 @@ export default class extends Controller {
   }
 
   buildOrder(){
-    fetch('/api/v0/build/order?access_key=qBvsmmlntfHhbKre570h7es9BJjUM6qDT6gVzj0E&course_id=1&amount=300',{
+    fetch('/api/v0/build/order?access_key=qBvsmmlntfHhbKre570h7es9BJjUM6qDT6gVzj0E&course_id=12&amount=300',{
       headers:{
         "X-Api-Secret-Key":"secret",
       },
