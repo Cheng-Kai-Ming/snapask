@@ -1,0 +1,35 @@
+<%= form_with(model: @course) do |f| %>
+
+  <div class="fields">
+    <%= f.label "類別" %>
+    <%= f.select :category, ["網頁前端","網頁後端","資料庫","電腦科學","其他"],
+      selected: "電腦科學" %>
+  </div>
+
+  <div class="fields">
+    <%= f.label "課程名稱" %>
+    <%= f.text_field :name %>
+  </div>
+  <div class="fields">
+    <%= f.label "課程價格" %>
+    <%= f.number_field :price %>
+  </div>
+  <div class="fields">
+    <%= f.label "幣別" %>
+    <%= f.select :currency, ["台幣","美金","人民幣","泰銖","歐元"],
+      selected: "台幣" %>
+  </div>
+  <div class="fields">
+    <%= f.label "介紹" %>
+    <%= f.text_area :intro %>
+  </div>
+
+  <div class="fields">
+    <%= f.label "有效日" %>
+    <%= f.select :valid_time, (1..30).to_a,
+      selected: @course.valid_time %>
+  </div>
+  
+
+  <%= f.submit  %>
+<% end %>

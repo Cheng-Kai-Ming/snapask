@@ -1,0 +1,32 @@
+<%= form_with(model: @course) do |f| %>
+
+  <div class="fields">
+    <%= f.label "類別" %>
+    <%= @course.category %>
+  </div>
+
+  <div class="fields">
+    <%= f.label "課程名稱" %>
+    <%= @course.name %>
+  </div>
+  <div class="fields">
+    <%= f.label "課程價格" %>
+    <%= @course.price %>
+  </div>
+  <div class="fields">
+    <%= f.label "幣別" %>
+    <%= @course.currency %>
+  </div>
+  <div class="fields">
+    <%= f.label "介紹" %>
+    <%= @course.intro %>
+  </div>
+
+  <div class="fields">
+    <%= f.label "有效天數" %>
+    <%= @course.valid_time %>
+  </div>
+
+  <%= link_to "回首頁", "/courses" %>
+  <%= link_to "下架", "/off?id=#{@course.id}" %>
+<% end %>
