@@ -5,7 +5,8 @@ export default class extends Controller {
   static targets = ["output", "courseInfo", "key"]
 
   courses(){
-      let coursesHTLM = ""
+      let coursesHTML = ""
+      this.outputTarget.innerHTML = ""
       fetch('/api/v0/courses',{
         headers:{
           "X-Api-Secret-Key":"secret"
@@ -14,28 +15,48 @@ export default class extends Controller {
         .then(function(response) {return response.json()} )
         .then((courses)=>{
           courses.forEach((element) =>{
-            coursesHTLM += 
-          `
-          <div>
-            <tr>
-              <td>${element.name}</td>
-              <td>${element.price}</td>
-              <td>${element.currency}</td>
-              <td>${element.category}</td>
-              <td>${element.intro}</td>
-              <button class="info" data-action="click->user#toggle" data-user-target = "courseInfo"  data-courseId=${element.id} data-coursePrice=${element.price}>購買</button>
-            </tr> 
-          </div>
-          `
+            if (element.state == "unavailable"){
+              coursesHTML += 
+              `
+              <div>
+                <tr>
+                  <td>${element.name}</td>
+                  <td>${element.price}</td>
+                  <td>${element.currency}</td>
+                  <td>${element.category}</td>
+                  <td>${element.intro}</td>
+                  <td>${element.state}</td>
+                </tr> 
+              </div>
+              `
+              
+            } else {
+              coursesHTML += 
+              `
+              <div>
+                <tr>
+                  <td>${element.name}</td>
+                  <td>${element.price}</td>
+                  <td>${element.currency}</td>
+                  <td>${element.category}</td>
+                  <td>${element.intro}</td>
+                  <td>${element.state}</td>
+                  <button class="info" data-action="click->user#toggle" data-user-target = "courseInfo"  data-courseId=${element.id} data-coursePrice=${element.price}>購買</button>
+                </tr> 
+              </div>
+              `
+            
+            }
+        
         })
-        this.outputTarget.innerHTML += coursesHTLM
+        this.outputTarget.innerHTML += coursesHTML
         }) 
   }
 
   orders(){
-    
     const key = this.keyTarget.dataset.key
-    let ordersHTLM = ""
+    this.outputTarget.innerHTML = ""
+    let ordersHTML = ""
     fetch(`/api/v0/orders?access_key=${key}`,{
       headers:{
         "X-Api-Secret-Key":"secret",
@@ -44,7 +65,7 @@ export default class extends Controller {
       .then(function(response) {return response.json()} )
       .then((orders)=>{
         orders.forEach(function(element){
-          ordersHTLM +=
+          ordersHTML +=
           `
           <div>
             <tr>
@@ -56,12 +77,11 @@ export default class extends Controller {
           </div>
         `
         })
-        this.outputTarget.innerHTML += ordersHTLM
+        this.outputTarget.innerHTML += ordersHTML
       }) 
   
   }
   toggle(element){
-    // var x = document.getElementsByClassName('info')
     const key = this.keyTarget.dataset.key
     const courseId = element.target.dataset.courseid
     const coursePrice = element.target.dataset.courseprice

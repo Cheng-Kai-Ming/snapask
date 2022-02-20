@@ -2,6 +2,7 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users
   resources :courses
+  get "/off", to: "courses#off"
   mount ApiRoot => ApiRoot::PREFIX
   authenticate :user, ->(u) { Ability.new(u).can? :manage, :admin } do
     mount Sidekiq::Web => 'admin/sidekiq'

@@ -12,7 +12,7 @@
   </div>
   <div class="fields">
     <%= f.label "課程價格" %>
-    <%= f.number_field :price %>
+    <%= f.number_field :price, min: 0 %>
   </div>
   <div class="fields">
     <%= f.label "幣別" %>

@@ -45,6 +45,12 @@ class CoursesController < ApplicationController
     end
   end
 
+  def off
+    course = Course.find_by(id: params[:id])
+    course.inlisting!
+    redirect_to courses_path
+  end
+
   def destroy
     @course = Course.find_by(id:params["id"])
     @course.destroy
