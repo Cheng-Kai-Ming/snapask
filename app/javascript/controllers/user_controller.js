@@ -1,9 +1,8 @@
-// import httpClient from "/app/javascript/lib/http/client"
 import { Controller } from "stimulus"
 
 
 export default class extends Controller {
-  static targets = ["output"]
+  static targets = ["output", "courseInfo"]
 
   courses(){
       let coursesHTLM = ""
@@ -15,7 +14,7 @@ export default class extends Controller {
       })
         .then(function(response) {return response.json()} )
         .then((courses)=>{
-          courses.forEach(function(element){
+          courses.forEach((element) =>{
             coursesHTLM += 
           `
           <div>
@@ -25,6 +24,7 @@ export default class extends Controller {
               <td>${element.currency}</td>
               <td>${element.category}</td>
               <td>${element.intro}</td>
+              <button class="info" data-action="click->user#toggle" data-user-target = "courseInfo"  data-courseId=${element.id} data-coursePrice=${element.price}>購買</button>
             </tr> 
           </div>
           `
@@ -59,9 +59,11 @@ export default class extends Controller {
       }) 
   
   }
-
-  buildOrder(){
-    fetch('/api/v0/build/order?access_key=qBvsmmlntfHhbKre570h7es9BJjUM6qDT6gVzj0E&course_id=12&amount=300',{
+  toggle(element){
+    // var x = document.getElementsByClassName('info')
+    const courseId = element.target.dataset.courseid
+    const coursePrice = element.target.dataset.courseprice
+    fetch(`/api/v0/build/order?access_key=qBvsmmlntfHhbKre570h7es9BJjUM6qDT6gVzj0E&course_id=${Number(courseId)}&amount=${Number(coursePrice)}`,{
       headers:{
         "X-Api-Secret-Key":"secret",
       },
@@ -69,6 +71,5 @@ export default class extends Controller {
     })
       .then(function(response) {return response.json()} )
       .then(function(json){console.log(json)}) 
-
   }
 }
