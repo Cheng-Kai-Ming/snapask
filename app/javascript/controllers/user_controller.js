@@ -2,15 +2,14 @@ import { Controller } from "stimulus"
 
 
 export default class extends Controller {
-  static targets = ["output", "courseInfo"]
+  static targets = ["output", "courseInfo", "key"]
 
   courses(){
       let coursesHTLM = ""
       fetch('/api/v0/courses',{
         headers:{
           "X-Api-Secret-Key":"secret"
-        },
-        params:{access_key: "Jazyx5znADzoubQ53zZIg0FxxvBmDcg3MVgP2dEY"}
+        }
       })
         .then(function(response) {return response.json()} )
         .then((courses)=>{
@@ -34,8 +33,10 @@ export default class extends Controller {
   }
 
   orders(){
+    
+    const key = this.keyTarget.dataset.key
     let ordersHTLM = ""
-    fetch('/api/v0/orders?access_key=qBvsmmlntfHhbKre570h7es9BJjUM6qDT6gVzj0E',{
+    fetch(`/api/v0/orders?access_key=${key}`,{
       headers:{
         "X-Api-Secret-Key":"secret",
       }
@@ -61,9 +62,10 @@ export default class extends Controller {
   }
   toggle(element){
     // var x = document.getElementsByClassName('info')
+    const key = this.keyTarget.dataset.key
     const courseId = element.target.dataset.courseid
     const coursePrice = element.target.dataset.courseprice
-    fetch(`/api/v0/build/order?access_key=qBvsmmlntfHhbKre570h7es9BJjUM6qDT6gVzj0E&course_id=${Number(courseId)}&amount=${Number(coursePrice)}`,{
+    fetch(`/api/v0/build/order?access_key=${key}&course_id=${Number(courseId)}&amount=${Number(coursePrice)}`,{
       headers:{
         "X-Api-Secret-Key":"secret",
       },

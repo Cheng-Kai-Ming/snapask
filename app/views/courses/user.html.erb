@@ -1,4 +1,5 @@
 <div data-controller = "user" >
+  <div type="hidden" data-user-target = "key" data-user-target = "userKey" data-key=<%=current_user.api_access_token.key%>></div>
   <button data-action="click->user#courses">Course</button>
 
   <button data-action="click->user#orders">Order</button>

@@ -2,6 +2,10 @@ class CoursesController < ApplicationController
   require 'rest-client'
   load_and_authorize_resource
 
+  def user
+    @courses = Course.all
+  end
+
   def index
     @courses = Course.all
   end
