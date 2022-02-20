@@ -1,6 +1,7 @@
 module ApiV0
   module Entities
     class Course < Entities::Base
+      expose :id
       expose :name
       expose :price
       expose :currency

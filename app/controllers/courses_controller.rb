@@ -1,5 +1,10 @@
 class CoursesController < ApplicationController
   require 'rest-client'
+  load_and_authorize_resource
+
+  def user
+    @courses = Course.all
+  end
 
   def index
     @courses = Course.all
@@ -38,6 +43,12 @@ class CoursesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def off
+    course = Course.find_by(id: params[:id])
+    course.inlisting!
+    redirect_to courses_path
   end
 
   def destroy
